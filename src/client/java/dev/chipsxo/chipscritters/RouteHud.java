@@ -52,7 +52,8 @@ public final class RouteHud {
 
 	public static void renderPreview(GuiGraphicsExtractor graphics, Minecraft client, int x, int y) {
 		renderMain(graphics, client, x, y, mainScale(client.getWindow().getGuiScaledWidth(), client.getWindow().getGuiScaledHeight()),
-				"Forest  •  Stop 12/35  •  10m");
+				RouteController.active() ? routeText(client)
+						: RoutePanelText.line("Cavern", "8/40", ChipsConfig.get().mode, "5m"));
 	}
 
 	public static void renderWaypointPreview(GuiGraphicsExtractor graphics, Minecraft client, int x, int y) {
@@ -113,31 +114,35 @@ public final class RouteHud {
 		if (!RouteController.active() && RouteController.biome() == Biome.FOREST && ForestFeederTracker.allBirdsFinished()) return "Forest clear - All birds caught";
 		if (ForestFeederTracker.finalCatchPending()) return "Forest done · " + ForestFeederTracker.missingBirdsText();
 		if (RouteController.buildingRoute() && RouteController.biome() != null) {
-			return RouteController.biome().displayName() + "  •  Building route…";
+			return RouteController.biome().displayName() + " · " + RoutePanelText.modeName(ChipsConfig.get().mode) + " · Building route…";
 		}
 		if (RouteController.waitingForForestBird()) {
-			return ForestFeederTracker.feedExhausted()
-					? "Forest  •  Birdfeeder empty — catch final bird"
-					: "Forest  •  Birdfeeder — use remaining feed, then catch final bird";
+			return mainRouteLine(ForestFeederTracker.feedExhausted()
+					? "Birdfeeder empty — catch final bird"
+					: "Birdfeeder — use remaining feed, then catch final bird");
 		}
 		if (RouteController.waitingForCavernWaterfall()) {
 			int step = SafariData.cavernWaterfallStepIndex(client.player.getY()) + 1;
-			return "Cavern  •  Waterfall route  " + step + "/" + SafariData.cavernWaterfallSteps().size() + "  •  Exit Y=82";
+			return mainRouteLine("Waterfall " + step + "/" + SafariData.cavernWaterfallSteps().size() + " · Exit Y=82");
 		}
-		if (RouteController.paused()) return "Route paused  •  /sr resume";
-		if (RouteController.finishingSkip()) return "Final stop skipped  •  /sr undo to restore";
+		if (RouteController.paused()) return mainRouteLine("Paused · /sr resume");
+		if (RouteController.finishingSkip()) return mainRouteLine("Final stop skipped · /sr undo to restore");
 		if (RouteController.active() && RouteController.biome() != null && RouteController.nextStop() < RouteController.stops().size()) {
 			int shown = Math.min(RouteController.nextStop() + 1, RouteController.stops().size());
 			double distance = RouteController.distanceToNext(client.player.position());
 			Vec3 target = RouteController.displayTarget();
 			
-			return RouteController.biome().displayName() + "  •  Stop " + RouteController.stopCounterText()
-					+ (Double.isFinite(distance)?String.format(java.util.Locale.ROOT, "  •  %.0fm",distance):"  •  Waiting");
+			return mainRouteLine(Double.isFinite(distance) ? String.format(java.util.Locale.ROOT, "%.0fm", distance) : "Waiting");
 		}
 		if (RouteController.assistBiome() != null) {
 			return "Assist " + ClaimsManager.ownerOf(RouteController.assistBiome()) + " at " + RouteController.assistBiome().displayName() + " gate";
 		}
-		return "Safari route active";
+		return RouteController.active() ? mainRouteLine("Waiting") : "Safari route active";
+	}
+
+	private static String mainRouteLine(String status) {
+		return RoutePanelText.line(RouteController.biome() == null ? "Safari" : RouteController.biome().displayName(),
+				RouteController.stopCounterText(), ChipsConfig.get().mode, status);
 	}
 
 	private static WaypointText waypointText(Minecraft client, float partial) {
@@ -210,7 +215,12 @@ public final class RouteHud {
 		UiTheme.card(graphics,0,0,PANEL_WIDTH,PANEL_HEIGHT,PANEL_BACKGROUND);
         graphics.fill(0,4,2,PANEL_HEIGHT-4,UiTheme.ACCENT);
 		graphics.text(client.font, "ChipsCritters", 6, 5, TITLE_COLOR, true);
-		graphics.text(client.font, fitText(client, current, PANEL_WIDTH - 12), 6, 19, BODY_COLOR, true);
+		float lineScale = RoutePanelText.lineScale(client.font.width(current) + 1, PANEL_WIDTH - 12);
+		graphics.pose().pushMatrix();
+		graphics.pose().translate(6, 19);
+		graphics.pose().scale(lineScale, lineScale);
+		graphics.text(client.font, current, 0, 0, BODY_COLOR, true);
+		graphics.pose().popMatrix();
 		if (config.showRouteProgress && RouteController.active() && !RouteController.stops().isEmpty()) {
 			int left = 6;
 			int right = PANEL_WIDTH - 6;

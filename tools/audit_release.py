@@ -4,7 +4,7 @@ Print filenames/categories, never matching secret contents. No signing-key folde
 from pathlib import Path
 import sys,re,json,hashlib,subprocess,zipfile
 ROOT=Path(__file__).resolve().parents[1]
-ROOT_FILES={'.gitignore','README.md','LICENSE','THIRD_PARTY_NOTICES.md','AI_DISCLOSURE.md','SECURITY.md','build.gradle','settings.gradle','gradle.properties','gradlew','gradlew.bat','RELEASE-NOTES-0.1.64.md'}
+ROOT_FILES={'.gitignore','README.md','LICENSE','THIRD_PARTY_NOTICES.md','AI_DISCLOSURE.md','SECURITY.md','build.gradle','settings.gradle','gradle.properties','gradlew','gradlew.bat','RELEASE-NOTES-0.1.64.md','RELEASE-NOTES-0.1.65.md'}
 BAD_PARTS={'.git','.gradle','.gradle-home','work','build','run','logs','config','__pycache__','.chipscritters-signing'}
 PATTERNS=[('private key',re.compile(rb'-----BEGIN (?:[A-Z0-9]+ )?PRIVATE KEY-----')),('GitHub credential',re.compile(rb'(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{30,})')),('AWS credential',re.compile(rb'AKIA[0-9A-Z]{16}')),('encoded Ed25519 private key',re.compile(rb'MC4CAQAwBQYDK2VwBCIEI[A-Za-z0-9+/=]{39,}'))]
 def candidates():

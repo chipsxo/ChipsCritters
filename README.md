@@ -1,6 +1,6 @@
 # ChipsCritters
 
-**AI-generated, open source (MIT)** client-side Fabric helpers for Hypixel SkyBlock Critter Safari. Release candidate **0.1.64**, Minecraft **26.2**, Java **25**. The code is MIT; third-party data retains the licenses documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+**AI-generated, open source (MIT)** client-side Fabric helpers for Hypixel SkyBlock Critter Safari. Release candidate **0.1.65**, Minecraft **26.2**, Java **25**. The code is MIT; third-party data retains the licenses documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 **Hypixel has not confirmed that ChipsCritters is allowed. Players use it at their own risk.** No approval or account-safety guarantee is claimed.
 
@@ -15,7 +15,7 @@ Install only one PUBLIC JAR for normal use. DEV is Chris's local recording/editi
 
 ## Features
 
-Fixed-coordinate routes for Cavern, Forest, Haunted and Icy; Money, Unique and Full Clear modes; waypoint cubes and route ribbons; a directional waypoint panel; route clocks, personal bests and history; movable HUD elements and airship tip banner; manual fixed-spot Hideyho search; and a six-second Doomspiral ready countdown with a double ding. A personal throw can show readiness sooner; only the own capture message marks Doomspiral caught.
+Fixed-coordinate routes for Cavern, Forest, Haunted and Icy; Money, Unique and Full Clear modes; waypoint cubes and route ribbons; a directional waypoint panel; active mode names on the main route panel; route clocks, personal bests and history; movable HUD elements and airship tip banner; manual fixed-spot Hideyho search; and a six-second Doomspiral ready countdown with a double ding. A personal throw can show readiness sooner; only the own capture message marks Doomspiral caught.
 
 Unique with a verified Shining Coin compares estimated added routed travel time for the existing Gimmiegold stop. It preserves the other remaining stops' order and finishes after Doomspiral once Gimmiegold is done. Without a coin, Gimmiegold stays after Doomspiral. Full Clear is a solo sweep.
 
@@ -86,9 +86,9 @@ Windows PowerShell, with Java 25 selected in JAVA_HOME:
 .\gradlew.bat regressionTest jar sourcesJar --no-daemon --no-configuration-cache
 ```
 
-PUBLIC output: `build/libs/chipscritters-0.1.64.jar`. Source JAR: `build/libs/chipscritters-0.1.64-sources.jar`. The Gradle wrapper selects the project's Gradle version. CI builds PUBLIC and source only. DEV can be built locally with the separate `devJar` task; do not attach its JAR to a public release.
+PUBLIC output: `build/libs/chipscritters-0.1.65.jar`. Source JAR: `build/libs/chipscritters-0.1.65-sources.jar`. The Gradle wrapper selects the project's Gradle version. CI builds PUBLIC and source only. DEV can be built locally with the separate `devJar` task; do not attach its JAR to a public release.
 
-See [route update/signing instructions](docs/ROUTE-UPDATES.md), [third-party notices](THIRD_PARTY_NOTICES.md), [MIT license](LICENSE), [AI disclosure](AI_DISCLOSURE.md) and [release-candidate notes](RELEASE-NOTES-0.1.64.md).
+See [route update/signing instructions](docs/ROUTE-UPDATES.md), [third-party notices](THIRD_PARTY_NOTICES.md), [MIT license](LICENSE), [AI disclosure](AI_DISCLOSURE.md) and [release-candidate notes](RELEASE-NOTES-0.1.65.md).
 
 ## Bug reports and screenshots
 
@@ -98,7 +98,7 @@ Only Chris-approved edited gallery copies are committed; originals are excluded.
 
 ## Gameplay gallery
 
-These are Chris's real gameplay captures, approved after cropping and privacy masks. They were captured before the 0.1.64 RC; they are not evidence that the RC's new timing or fixes passed live tests. No route graphics, labels or counts were regenerated or altered. The old 0.1.63 menu screenshots are excluded pending retakes.
+These are Chris's real gameplay captures, approved after cropping and privacy masks. They were captured before the 0.1.65 RC; they are not evidence that the RC's new timing or fixes passed live tests. No route graphics, labels or counts were regenerated or altered. The old 0.1.63 menu screenshots are excluded pending retakes.
 
 ![Cavern route and ladder guidance](docs/images/cavern-route-and-ladder-guidance.png)
 
@@ -116,4 +116,4 @@ A full-width tip banner during the Safari airship scene.
 
 Safari shards in the Hunting Box use a **1,000-coin minimum per-shard sell/salvage difference** by default, inclusive of exactly 1,000. The existing percentage minimum also applies. Change it under Tools → Bag colors and airship tips; its dedicated reset returns to 1,000. Old configs gain the new 1,000-coin default, while saved custom coin/percentage values are preserved. Below the thresholds, neither a decision border/corner symbol nor the decision-dependent ChipsCritters comparison tooltip line is shown. It does not perform salvage/sell actions or compare a whole bag/stack total.
 
-Sell value remains the current sell-order price minus the configured fee. Salvage value remains rarity Essence (1/2/4/8/16) divided by 2,500, times Morning Dew's sell-order price. Missing/stale prices and non-Safari items remain uncolored. The highlight renderer was not redesigned or fixed in this RC; live visibility still requires testing.
+Sell value remains the current sell-order price minus the configured fee. Salvage value remains rarity Essence (1/2/4/8/16) divided by 2,500, times Morning Dew's sell-order price. Missing/stale prices and non-Safari items remain uncolored. The highlight renderer was not redesigned or fixed in this RC; Chris confirmed live visibility in the 0.1.64 test; this patch leaves it unchanged.

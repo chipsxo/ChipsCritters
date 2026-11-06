@@ -100,7 +100,7 @@ public final class RouteBehaviorRegressionTests {
 		lobbyInfoSessionAndReplySuppression();
 		routeStopCounterTracksLiveStops();
 		waypointPanelPlacement();
-		try { SignedRouteRegressionTests.run(); RecordingRegressionTests.run(); Patch57RegressionTests.run(); Patch58RegressionTests.run(); Patch59RegressionTests.run(); Patch60RegressionTests.run(); Patch61RegressionTests.run(); Patch62RegressionTests.run(); Patch63RegressionTests.run(); Patch64RegressionTests.run(); } catch(Exception e) { throw new AssertionError(e); }
+		try { SignedRouteRegressionTests.run(); RecordingRegressionTests.run(); Patch57RegressionTests.run(); Patch58RegressionTests.run(); Patch59RegressionTests.run(); Patch60RegressionTests.run(); Patch61RegressionTests.run(); Patch62RegressionTests.run(); Patch63RegressionTests.run(); Patch64RegressionTests.run(); Patch65RegressionTests.run(); } catch(Exception e) { throw new AssertionError(e); }
 		System.out.println("Route behavior regression checks passed.");
 	}
 

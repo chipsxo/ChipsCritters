@@ -9,7 +9,7 @@ import java.util.concurrent.*;
 
 /** Data updates are staged by a worker and only activated at a new-run boundary. */
 public final class RouteDataUpdates {
- public static final String MOD_VERSION="0.1.64";
+ public static final String MOD_VERSION="0.1.65";
  private static final Gson GSON=new GsonBuilder().setPrettyPrinting().create();
  static Path folder(){return net.fabricmc.loader.api.FabricLoader.getInstance().getConfigDir().resolve("chipscritters-routes");}
  private static final RouteUpdateState DATA=new RouteUpdateState();

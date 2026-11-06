@@ -55,7 +55,7 @@ abstract class ChipsScreen extends Screen {
   for(var n:natural)if(n.widget instanceof EditBox e&&e.visible){int x=e.getX(),y=e.getY(),w=e.getWidth(),h=e.getHeight(),c=e.isFocused()?UiTheme.ACCENT:UiTheme.BORDER;g.fill(x-1,y-1,x+w+1,y,c);g.fill(x-1,y+h,x+w+1,y+h+1,c);g.fill(x-1,y,x,y+h,c);g.fill(x+w,y,x+w+1,y+h,c);}
   if(canvas())return;
   int x=contentLeft();UiTheme.line(g,font,"CHIPSCRITTERS",x,19,contentWidth()-60,UiTheme.ACCENT);
-  g.text(font,"0.1.64",width-contentLeft()-font.width("0.1.64"),19,UiTheme.MUTED,false);
+  g.text(font,"0.1.65",width-contentLeft()-font.width("0.1.65"),19,UiTheme.MUTED,false);
   String timer=RouteController.active()?RunHistory.formatDuration(RouteController.elapsedMillis()):"";
   UiTheme.line(g,font,getTitle().getString().replace("ChipsCritters — ",""),x,33,contentWidth()-font.width(timer)-8,UiTheme.TEXT);
   if(!timer.isBlank())g.text(font,timer,width-contentLeft()-font.width(timer),33,UiTheme.ACCENT,false);

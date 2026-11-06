@@ -28,7 +28,7 @@ Every listed command is checked against the built PUBLIC command tree. This is n
 
 Only the Hypixel Bazaar API, read-only signed route-data URL and optional configured relay are used. Relay is off with a blank endpoint by default. All fresh users start with bundled routes. Downloaded route data must pass the pinned signature and safety checks, falls back to last-good/bundled data when missing/invalid/offline, and activates only between runs. No scripts/JARs/commands are downloaded or executed. The mod does not read session tokens, Microsoft login data, launcher/account files, Discord or passwords. No secrets or write access are bundled.
 
-The Hunting Box compares exact Safari shards using sell-order less fee versus rarity Essence / 2,500 × Morning Dew sell-order value. A separate 1,000-coin per-shard difference filter is added, inclusive; custom values, existing percentage and fee settings are retained. Highlight rendering was not changed and is not confirmed working in-game.
+The Hunting Box compares exact Safari shards using sell-order less fee versus rarity Essence / 2,500 × Morning Dew sell-order value. A separate 1,000-coin per-shard difference filter is added, inclusive; custom values, existing percentage and fee settings are retained. Chris confirmed highlight rendering worked in his 0.1.64 test. This patch leaves it unchanged.
 
 ## Project links
 
@@ -44,8 +44,8 @@ Review and redact screenshots/logs before posting. Never post passwords, tokens 
 2. Haunted route panel and Doomspiral countdown.
 3. Full-width airship tip banner during the Safari airship scene.
 
-These approved real captures predate 0.1.64 and are not evidence of live RC testing. Retake both 0.1.63 menu screenshots before using them as current-version gallery images. Do not use NO SAFE PATH — FOLLOW ARROW screenshots as feature images.
+These approved real captures predate 0.1.65 and are not evidence of live RC testing. Retake both 0.1.63 menu screenshots before using them as current-version gallery images. Do not use NO SAFE PATH — FOLLOW ARROW screenshots as feature images.
 
 ## Upload checklist — only after publication approval
 
-Create/select the actual Modrinth project and link it in the README once its official URL is verified. Use ChipsCritters-0.1.64.jar, exactly the same bytes and SHA-256 as the GitHub release. Link the open source archive. Never upload the DEV JAR. Keep the listing as a draft until Chris authorizes publication.
+Create/select the actual Modrinth project and link it in the README once its official URL is verified. Use ChipsCritters-0.1.65.jar, exactly the same bytes and SHA-256 as the GitHub release. Link the open source archive. Never upload the DEV JAR. Keep the listing as a draft until Chris authorizes publication.
