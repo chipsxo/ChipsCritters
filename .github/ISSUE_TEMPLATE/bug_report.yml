@@ -1,0 +1,52 @@
+name: Bug report
+description: Report a ChipsCritters problem
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Review latest.log before attaching it. Remove player/personal details, server addresses, private messages, credentials and anything you do not want public. Never attach account, launcher or signing-key files."
+  - type: input
+    id: version
+    attributes:
+      label: Mod version
+    validations:
+      required: true
+  - type: dropdown
+    id: edition
+    attributes:
+      label: JAR edition
+      options:
+        - PUBLIC
+        - DEV (local testing only)
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Route mode
+      options:
+        - Money
+        - Unique
+        - Full Clear
+    validations:
+      required: true
+  - type: input
+    id: biome
+    attributes:
+      label: Biome
+  - type: input
+    id: coordinates
+    attributes:
+      label: Stop coordinates (XYZ)
+      description: Coordinates identify the stop even when its number changes.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Reviewed latest.log
+      description: Attach a reviewed, redacted copy; include the relevant timestamp.

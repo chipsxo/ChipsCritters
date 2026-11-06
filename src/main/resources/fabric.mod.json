@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "chipscritters",
+  "version": "${version}",
+  "name": "ChipsCritters",
+  "description": "Fixed-route and local market helpers for Critter Safari.",
+  "authors": [
+    "chipsxo",
+    "AI-assisted contributors"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.chipsxo.chipscritters.ChipsCrittersClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "contact": {
+    "homepage": "https://github.com/chipsxo/ChipsCritters",
+    "sources": "https://github.com/chipsxo/ChipsCritters",
+    "issues": "https://github.com/chipsxo/ChipsCritters/issues"
+  }
+}

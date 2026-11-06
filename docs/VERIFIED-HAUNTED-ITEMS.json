@@ -1,0 +1,9 @@
+{
+  "source": "https://api.hypixel.net/v2/resources/skyblock/items",
+  "checked": "2026-11-04",
+  "runtimeRequestsAdded": false,
+  "items": [
+    {"id": "SHINING_COIN", "name": "Shining Coin"},
+    {"id": "SOOTHING_INCENSE", "name": "Soothing Incense"}
+  ]
+}

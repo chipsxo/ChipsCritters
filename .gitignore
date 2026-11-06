@@ -1,0 +1,50 @@
+# Build output and machine state
+.gradle/
+.gradle-home/
+build/
+work/
+.restore-*/
+run/
+out/
+.idea/
+.vscode/
+*.iml
+__pycache__/
+*.py[cod]
+# Private signing material and credentials (public keys are allowed)
+.chipscritters-signing/
+**/.chipscritters-signing/**
+private.pk8
+*.pk8
+*.p12
+*.pfx
+*.key
+*.pem
+.env
+.env.*
+*credentials*.json
+*credentials*.yml
+*credentials*.yaml
+*token*.txt
+# Player/account files, local configuration, logs and recordings
+config/
+logs/
+*.log
+crash-reports/
+screenshots/
+launcher_accounts.json
+launcher_profiles.json
+accounts.json
+usercache.json
+options.txt
+servers.dat
+*.dat_old
+hs_err_pid*
+# Public source repo contains no build/release binaries or local recordings
+*.jar
+*.zip
+!gradle/wrapper/gradle-wrapper.jar
+routes-export*.json
+pending-signed.json
+last-good*.json
+recorded-legs.json

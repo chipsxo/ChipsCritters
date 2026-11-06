@@ -1,0 +1,118 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        "chipscritters" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+sourceSets {
+    regressionTest {
+        java.srcDir 'src/regressionTest/java'
+        compileClasspath = sourceSets.main.output + sourceSets.client.output + sourceSets.client.compileClasspath
+        runtimeClasspath = output + sourceSets.main.output + sourceSets.client.output + sourceSets.client.compileClasspath
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+processResources {
+    def modVersion = project.version
+    inputs.property "version", modVersion
+    filesMatching("fabric.mod.json") {
+        expand "version": modVersion
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
+    options.encoding = "UTF-8"
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+def modArchiveName = project.archives_base_name.toString()
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${modArchiveName}" }
+    }
+}
+
+tasks.register('regressionTest', JavaExec) {
+    dependsOn tasks.named('regressionTestClasses')
+    classpath = sourceSets.regressionTest.runtimeClasspath
+    mainClass = 'dev.chipsxo.chipscritters.RouteBehaviorRegressionTests'
+}
+
+tasks.named('compileRegressionTestJava') {
+    dependsOn tasks.named('classes')
+    dependsOn tasks.named('clientClasses')
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('regressionTest')
+}
+
+
+// Only this separate artifact enables official route recording/editing commands.
+tasks.register('devJar', Jar) {
+    dependsOn tasks.named('classes'), tasks.named('clientClasses')
+    archiveClassifier = 'dev'
+    from sourceSets.main.output
+    from sourceSets.client.output
+    from 'src/dev/resources'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Public clients render signed recorded paths, but do not contain the recorder/editor implementation.
+tasks.named('jar') { exclude '**/RouteRecorder*.class' }
+tasks.named('sourcesJar') { from('tools') { into 'tools' }; from('docs') { into 'docs' } }
+tasks.named('devJar') { from('LICENSE') { rename { 'LICENSE_chipscritters' } } }
+
+// Offline developer audit; this source set is never bundled as mod executable code.
+sourceSets {
+    routeAudit {
+        java.srcDir 'src/routeAudit/java'
+        compileClasspath = sourceSets.main.output + sourceSets.client.output + sourceSets.client.compileClasspath
+        runtimeClasspath = output + compileClasspath
+    }
+}
+tasks.register('routeLegAudit', JavaExec) {
+    dependsOn tasks.named('routeAuditClasses'), tasks.named('classes'), tasks.named('clientClasses')
+    classpath = sourceSets.routeAudit.runtimeClasspath
+    mainClass = 'dev.chipsxo.chipscritters.Route56Audit'
+}
+tasks.named('compileRouteAuditJava') { dependsOn tasks.named('classes'), tasks.named('clientClasses') }
+tasks.named('sourcesJar') { from('src/routeAudit/java') { into 'tools/audit/java' } }
+
+// Publish notices with each executable edition; source artifacts contain no local bytecode caches.
+tasks.named('jar') { from('THIRD_PARTY_NOTICES.md', 'AI_DISCLOSURE.md', 'SECURITY.md') }
+tasks.named('devJar') { from('THIRD_PARTY_NOTICES.md', 'AI_DISCLOSURE.md', 'SECURITY.md') }
+tasks.named('sourcesJar') {
+    exclude '**/__pycache__/**', '**/*.pyc', '**/*.class'
+    from('LICENSE', 'README.md', 'THIRD_PARTY_NOTICES.md', 'AI_DISCLOSURE.md', 'SECURITY.md')
+}
